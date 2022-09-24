@@ -2,6 +2,10 @@
 Uses the CATAAS API (https://cataas.com) to send people of your choosing by email a random cat and text. 
 You can choose what type of message you want to send by telling the application to send a birthday, christmas or new year wishes. 
 
+I made this because a friend sent me the API and I'm a fan of cats. Cat is love, cat is live. 
+Also gives people the idea that you never forget about them depite me automating the whole process and still forgot about untill they thank you for the kind gesture. 
+The less they know.
+
 ## How does it work?
 The application is made using C# as a console application. The usage is extremely simple and you can use it to automate the messages as well.
 To send something, start the console application, it will ask for the e-mail address and what kind of message you want to send. As of now you can select one of three
