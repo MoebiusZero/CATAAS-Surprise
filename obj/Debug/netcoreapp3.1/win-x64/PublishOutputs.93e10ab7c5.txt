@@ -1,0 +1,2 @@
+Z:\Code Projects\SendCATAASsurprise\SendCATAASsurprises\bin\Debug\netcoreapp3.1\win-x64\publish\SendCATAASsurprises.pdb
+Z:\Code Projects\SendCATAASsurprise\SendCATAASsurprises\bin\Debug\netcoreapp3.1\win-x64\publish\SendCATAASsurprises.exe
