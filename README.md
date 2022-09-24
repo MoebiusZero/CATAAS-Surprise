@@ -15,7 +15,8 @@ To send something, start the console application, it will ask for the e-mail add
 (Do type these without any spaces)
 
 If you want to automate it, create a new scheduled task in Windows. Set it to run once a month. Lets say for Christmas you would want to set it to every december the 25th at 00:00 and the first time it should run should also be on 25 december current or next year depending on when you created the task.
-Next navigate to the path where you stored the console application, then set the paramaters like this: <emailaddress> <typeofmessage> so for example: "hello@there.com" "christmas"
+Next navigate to the path where you stored the console application, then set the paramaters like this: <emailaddress> <typeofmessage> 
+example: "hello@there.com" "christmas"
 Also don't forget to set the task to run whether you are logged on or not. 
 
 ## How do I change/add lines?
