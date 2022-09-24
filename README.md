@@ -44,7 +44,7 @@ I will not be covering how to create a conditional access policies, I will only 
 To test if the account has MFA disabled, try logging into any Microsoft 365 service with it and see if it asks for anything. 
 
 ## How I change the mailserver settings?
-You will need to edit the **App.config** for that. It will contain settings that look like this:
+Before you can even send, you will need to edit the **App.config** for that. It will contain settings that look like this:
 ```C#
 <appSettings>
     <add key="Host" value="<smtp server"/>
@@ -55,6 +55,7 @@ You will need to edit the **App.config** for that. It will contain settings that
     <add key="Password" value="<email password"/>
   </appSettings>
   ``` 
+
  ## How do I edit the body and subject?
 You can find these settings in the **Program** class. 
 Scroll all the way down to find the switch statement that sends the email. 
