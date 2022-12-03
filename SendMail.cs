@@ -87,7 +87,7 @@ namespace SendCATAASsurprises
             NetworkCredential NetworkCred = new NetworkCredential(ConfigurationManager.AppSettings["Username"], ConfigurationManager.AppSettings["Password"]);
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = NetworkCred;
-            smtp.EnableSsl = true;
+            smtp.EnableSsl = false;
             
             smtp.Port = int.Parse(ConfigurationManager.AppSettings["Port"]);
             Console.WriteLine("Sending Email......");
