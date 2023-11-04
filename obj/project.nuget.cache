@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LlU43PLgMR355TZudpEyx7dDecQRyGuC89oAEviuSldNutviWdBaOUL/x8LwuCpDjg+EP0voADRZofH6YLXdmw==",
+  "dgSpecHash": "5m9duv7NRsKGR9WmXYsbB8nOIXGv27rxlTuyuO0hkLcBVhoDHKq5PmCS8dZIAX2WLLdwt6qmRdFuVemURd4BFg==",
   "success": true,
   "projectFilePath": "Z:\\Code Projects\\SendCATAASsurprise\\SendCATAASsurprises\\SendCATAASsurprises.csproj",
   "expectedPackageFiles": [
@@ -12,7 +12,11 @@
     "C:\\Users\\s.lim\\.nuget\\packages\\system.security.cryptography.protecteddata\\6.0.0\\system.security.cryptography.protecteddata.6.0.0.nupkg.sha512",
     "C:\\Users\\s.lim\\.nuget\\packages\\system.security.permissions\\6.0.0\\system.security.permissions.6.0.0.nupkg.sha512",
     "C:\\Users\\s.lim\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
-    "C:\\Users\\s.lim\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
+    "C:\\Users\\s.lim\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
+    "C:\\Users\\s.lim\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\s.lim\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\s.lim\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\s.lim\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.32\\microsoft.netcore.app.host.win-x64.3.1.32.nupkg.sha512"
   ],
   "logs": []
 }

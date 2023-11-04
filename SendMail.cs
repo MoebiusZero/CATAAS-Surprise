@@ -69,16 +69,24 @@ namespace SendCATAASsurprises
 
     public void Send(string email, string subject, string url)
         {           
-            var base64 = ConvertImageURLToBase64(url);          
-            
+            var base64 = ConvertImageURLToBase64(url);
+            string savefile = "tempimage.jpg";
+            File.WriteAllBytes(savefile, Convert.FromBase64String(base64));
+
             using MailMessage mm = new MailMessage();
             mm.To.Add(new MailAddress(email));
             mm.From = new MailAddress(ConfigurationManager.AppSettings["FromEmail"], ConfigurationManager.AppSettings["FromEmailName"]);
             mm.Subject = subject;
-            string contenttype = ConvertImageURLToBase64Type(url); 
-            string imagecontent = "<img src='data:image/" + contenttype + ";base64," + base64 + "'/>";            
-            mm.Body = imagecontent + "<br><br><h3>Met vriendelijke groet</h3><h4> El Tigre </h4><p style = font-size:8px> Zit een afbeelding bij, klik in Outlook de optie om afbeeldingen of geblokkeerde inhoud te weergeven</p>";
-            mm.IsBodyHtml = true;        
+            LinkedResource LinkedImage = new LinkedResource(savefile);
+            LinkedImage.ContentId = "myPic";
+
+            AlternateView htmlView = AlternateView.CreateAlternateViewFromString(
+                "<img src=cid:myPic> <br><br><h3>Met vriendelijke groet</h3><h4> El Tigre </h4><p style = font-size:8px> Zit een afbeelding bij, klik in Outlook de optie om afbeeldingen of geblokkeerde inhoud te weergeven</p>", null, "text/html"
+                );
+
+            htmlView.LinkedResources.Add(LinkedImage);
+            mm.AlternateViews.Add(htmlView);
+            
             SmtpClient smtp = new SmtpClient
             {
                 Host = ConfigurationManager.AppSettings["Host"],
@@ -93,6 +101,8 @@ namespace SendCATAASsurprises
             Console.WriteLine("Sending Email......");
             smtp.Send(mm);
             Console.WriteLine("Email Sent.");
+            mm.AlternateViews.Dispose();
+            File.Delete(savefile);
             System.Threading.Thread.Sleep(3000);
             Environment.Exit(0);
         }

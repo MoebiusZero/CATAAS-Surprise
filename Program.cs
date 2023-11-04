@@ -75,7 +75,7 @@ namespace SendCATAASsurprises
                     Random chrnd = new Random();
                     int chindex = chrnd.Next(christmasgen.Length);
                     string christmasline = Uri.EscapeDataString(christmasgen[chindex]);
-                    string churl = "https://cataas.com/c/s/" + christmasline + "?wi=800&he=800";
+                    string churl = "https://cataas.com/cat/says/" + christmasline + "?fontColor=orange&width=1000&height=1000";
                     SendMail sm = new SendMail();
                     sm.Send(mail, "VROLIJK KERSTFEEST!", churl);
                     break;
@@ -84,7 +84,7 @@ namespace SendCATAASsurprises
                     Random bdrnd = new Random();
                     int bdindex = bdrnd.Next(birthdaygen.Length);
                     string birthdayline = Uri.EscapeDataString(birthdaygen[bdindex]);
-                    string bdurl = "https://cataas.com/c/s/" + birthdayline + "?wi=800&he=800";
+                    string bdurl = "https://cataas.com/cat/says/" + birthdayline + "?fontColor=orange&width=1000&height=1000";
                     SendMail bdsm = new SendMail();
                     bdsm.Send(mail, "GEFELICITEERD JARIGE JOB!", bdurl);
                     break;
@@ -93,7 +93,7 @@ namespace SendCATAASsurprises
                     Random nyrnd = new Random();
                     int nyindex = nyrnd.Next(newyeargen.Length);
                     string newyearline = Uri.EscapeDataString(newyeargen[nyindex]);
-                    string nyurl = "https://cataas.com/c/s/" + newyearline + "?wi=800&he=800";
+                    string nyurl = "https://cataas.com/cat/says/" + newyearline + "?fontColor=orange&width=1000&height=1000";
                     SendMail nysm = new SendMail();
                     nysm.Send(mail, "GELUKKIG NIEUWJAAR!", nyurl);
                     break;
