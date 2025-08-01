@@ -30,20 +30,8 @@ I'm also assuming it might work for 2007/2010 as well because all you really nee
 I've seen cases where SSL isn't really working properly on an Exchange server because the certificates seems wrong despite admins renewing it.
 In the Sendmail class you might want to leave out **smtp.EnableSsl** or set it to false.
 
-As for Exchange 365, this works as well. The caveat here is that the account you are using to send MUST have MFA disabled. 
-You have two ways to send e-mails. Direct send or Microsoft's SMTP server.
-Direct send allows you to send only mails to anyone within your tenant so basically internal only, this does not require a license!
-If you want to send mail externally, then you need to assign at least a Exchange license to the user and configure it with the least amount of rights because you will be using it as a "service account" but you do you. I'm not here to judge you for how you deal with security.
-
-## Disable MFA
-By default Azure enables MFA for ALL users because of the Security Defaults. To make sending possible you need to disable the Azure Security Defaults and replace it with Conditional Access policies to cover MFA policies you might have or need. 
-I will not be covering how to create a conditional access policies, I will only tell you how to disable the Security Defaults for "testing" purposes
-- Login to https://portal.azure.com and go to **Azure Active Directory**
-- Go to **Properties**
-- All the way down you'll find a link named **Manage security defaults**
-- Set it to **No** and when asked about why, just select anything and save.
-
-To test if the account has MFA disabled, try logging into any Microsoft 365 service with it and see if it asks for anything. 
+As for Exchange 365, this works as well. You will need to program modern authentication in it which I haven't. 
+To save myself some time, I've opted to use a free SMTP service to send the emails (https://www.smtp2go.com/)
 
 ## How I change the mailserver settings?
 Before you can even send, you will need to edit the **App.config** for that. It will contain settings that look like this:
