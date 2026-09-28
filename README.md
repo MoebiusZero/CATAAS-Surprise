@@ -7,7 +7,7 @@ Also gives people the idea that you never forget about them depite me automating
 The less they know.
 
 ## How does it work?
-The application is made using C# as a console application. The usage is extremely simple and you can use it to automate the messages as well.
+The application is made using C# as a console application on .NET 10. To build it you need the [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0). The usage is extremely simple and you can use it to automate the messages as well.
 To send something, start the console application, it will ask for the e-mail address and what kind of message you want to send. As of now you can select one of three
 - Birthday
 - Christmas
@@ -15,50 +15,68 @@ To send something, start the console application, it will ask for the e-mail add
 (Do type these without any spaces)
 
 If you want to automate it, create a new scheduled task in Windows. Set it to run once a month. Lets say for Christmas you would want to set it to every december the 25th at 00:00 and the first time it should run should also be on 25 december current or next year depending on when you created the task.
-Next navigate to the path where you stored the console application, then set the paramaters like this: <emailaddress> <typeofmessage> 
-example: "hello@there.com" "christmas"
-    
+Next navigate to the path where you stored the console application, then set the paramaters like this: <emailaddress> <typeofmessage> so for example: "hello@there.com" "christmas"
 Also don't forget to set the task to run whether you are logged on or not. 
 
 ## How do I change/add lines?
-The current lines are in Dutch, you can easily change the lines to any language you like by editing the **newyeargen**, **birthdaygen** and **christmasgen** arrays in the **Program** class.
+The current lines are in Dutch, you can easily change the lines to any language you like by editing the **messages** list in the **Program** class. Each message type has a subject and a list of lines, one line is picked at random.
+To add a new message type, add another entry to that list, e.g. `["easter"] = ("VROLIJK PASEN!", new[] { "..." })`.
 I should warn you that you shouldn't make the lines too long. The CATAAS API doesn't do new lines as far as I know so if you do make the lines too long, it will be cutoff on both the left and right side because all text is centered. 
 
-## Does this work with any Exchange version?
-I tested this with Exchange 2013, so I would assume it would work for any version above that. 
-I'm also assuming it might work for 2007/2010 as well because all you really need is to allow the sending computer to send mail. So basically configure a relay in your Exchange server.
-I've seen cases where SSL isn't really working properly on an Exchange server because the certificates seems wrong despite admins renewing it.
-In the Sendmail class you might want to leave out **smtp.EnableSsl** or set it to false.
+## How does it send email?
+It sends through Microsoft 365 using the Microsoft Graph API and an app registration. No SMTP, no passwords and no need to disable MFA.
+The app logs in as itself (client ID + client secret) and sends the email from the mailbox you set in **FromEmail**.
 
-As for Exchange 365, this works as well. You will need to program modern authentication in it which I haven't. 
-To save myself some time, I've opted to use a free SMTP service to send the emails (https://www.smtp2go.com/)
+### 1. Create the app registration
+- Go to https://entra.microsoft.com > **Applications** > **App registrations** > **New registration**
+- Give it a name (e.g. *CATAAS Surprise*), leave the rest on default and click **Register**
+- On the **Overview** page, copy the **Application (client) ID** and **Directory (tenant) ID**
 
-## How I change the mailserver settings?
-Before you can even send, you will need to edit the **App.config** for that. It will contain settings that look like this:
-```C#
+### 2. Give it permission to send mail
+- Go to **API permissions** > **Add a permission** > **Microsoft Graph** > **Application permissions**
+- Search for **Mail.Send**, tick it and click **Add permissions**
+- Click **Grant admin consent for <your tenant>**
+
+> ⚠️ **Mail.Send** as an application permission lets the app send as **any** mailbox in your tenant.
+> Limit it to just the sending mailbox with [RBAC for Applications in Exchange Online](https://learn.microsoft.com/exchange/permissions-exo/application-rbac) (or the older application access policies).
+
+### 3. Create a client secret
+- Go to **Certificates & secrets** > **Client secrets** > **New client secret**
+- Copy the **Value** straight away, you can't see it again later. Note the expiry date, the app stops sending when it expires.
+
+### 4. Configure the application
+Fill in **App.config**:
+```xml
 <appSettings>
-    <add key="Host" value="<smtp server"/>
-    <add key="Port" value="<smtp port>"/>
-    <add key="FromEmail" value="<From Emailaddress>"/>
-    <add key="FromEmailName" value="<Displayname E-mail> "/>
-    <add key="Username" value="<email username>"/>
-    <add key="Password" value="<email password"/>
-  </appSettings>
-  ``` 
+    <add key="TenantId" value="<Directory (tenant) ID>"/>
+    <add key="ClientId" value="<Application (client) ID>"/>
+    <add key="ClientSecret" value=""/>
+    <add key="FromEmail" value="<mailbox to send from>"/>
+    <add key="ErrorEmail" value="<where error reports go>"/>
+</appSettings>
+```
+Put the client secret in an environment variable instead of **App.config**, so it never ends up in git:
+```powershell
+[Environment]::SetEnvironmentVariable("CATAAS_CLIENT_SECRET", "<secret value>", "User")
+```
+Set it for the same user account the scheduled task runs as. If you really want to, you can put it in **ClientSecret** in **App.config** instead, but don't commit that.
+
+The **FromEmail** mailbox needs to be a licensed user mailbox or a shared mailbox (shared mailboxes don't need a license) in your tenant.
+The display name recipients see is the display name of that mailbox.
+
+If anything goes wrong (unknown message type, CATAAS down, Microsoft 365 refusing the email), the details are emailed to **ErrorEmail** with the subject "Error in CATAAS App" and the application exits with code 1, so a scheduled task shows it as failed.
+If the Microsoft 365 login itself fails (e.g. an expired client secret), the error can't be emailed and is only shown in the console. 
 
  ## How do I edit the body and subject?
-You can find these settings in the **Program** class. 
-Scroll all the way down to find the switch statement that sends the email. 
-Change the second parameter in the following line to change the subject: 
+The subjects are in the **messages** list in the **Program** class, next to the lines for each message type:
 ```C#
-sm.Send(mail, "VROLIJK KERSTFEEST!", churl);
+["christmas"] = ("VROLIJK KERSTFEEST!", new[]
 ```
-The body is actually contained within the **Sendmail** class. Look for the **mm.body** line you will see it adds the imagecontent variable for the image and then a "With regards" line in dutch.
-I've enabled HTML so you can edit the body with all the HTML tags you need to create a body or just leave it all out and just send the image. To do that, just delete the entire line but leave **imagecontent** there
+The body is contained within the **SendMail** class. Look for the **content** line in the **Send** method: the HTML string there contains the image (`<img src="cid:myPic">`) followed by a "With regards" line in Dutch.
+You can edit that HTML however you like, or remove everything except the `<img src="cid:myPic">` tag to send only the image.
 
-## Any dependancies?
-No, none at all. It uses the basic out-of-the box functionalities. 
-- **System.net.mail**
-- **System.IO**
-- **System.Text**
-Really not all that special as you can see. 
+## Any dependencies?
+Just one NuGet package, which is restored automatically when you build:
+- **System.Configuration.ConfigurationManager** (reads the settings from **App.config**)
+
+Everything else comes with .NET out of the box (**System.Net.Http** for Microsoft Graph, **System.Text.Json**, **System.IO**).
