@@ -93,7 +93,16 @@ namespace SendCATAASsurprises
                     "Mentaal ben je voorbereid voor kerst, financieel nooit",
                     "Kerstkado's komen vanuit het hart, maar geld en kadobonnen werken ook",
                     "Kerst is een dag van wonderen. Al mijn geld verdwijnt gewoon!",
-                    "De kerstman is altijd vrolijk, hij weet waar alle stoute meiden wonen :)"
+                    "De kerstman is altijd vrolijk, hij weet waar alle stoute meiden wonen :)",
+                    "Kerst: de enige tijd dat een boom in de woonkamer normaal is",
+                    "Ik had een kado voor je, maar de kat zat erop",
+                    "De kerstman weet waar je woont. Eigenlijk best eng",
+                    "Kerstdiner: 3 dagen koken, 20 minuten eten, 2 uur afwassen",
+                    "Kerst is familie. Daarom duurt het maar twee dagen",
+                    "Geen kado, wel een kat. Niet terugbrengen!",
+                    "Tweede kerstdag bestaat alleen voor de restjes",
+                    "Als de kerstman katten had, kwam alles drie dagen te laat",
+                    "Deze kat is je kerstkaart. Duurzaam én gratis!"
                 }),
 
                 ["birthday"] = ("GEFELICITEERD JARIGE JOB!", new[]
@@ -109,7 +118,17 @@ namespace SendCATAASsurprises
                     "From hearte congratulations with your furyearday",
                     "Geweldig nieuws! …je leeft nog steeds!",
                     "Gefeliciteerd met 1 jaar dichterbij pensioen!",
-                    "Wat gaat naar boven, maar nooit naar beneden? Je leeftijd! :3"
+                    "Wat gaat naar boven, maar nooit naar beneden? Je leeftijd! :3",
+                    "Je bent niet oud, je bent vintage",
+                    "Leeftijd is maar een getal. In jouw geval een best hoog getal",
+                    "Meer kaarsjes dan taart, dat is ook een prestatie",
+                    "Katten hebben 9 levens, jij zit nog op je eerste. Zuinig op!",
+                    "Een jaar ouder, maar gelukkig niet volwassener",
+                    "Ik had een kado, maar de kat heeft het opgegeten",
+                    "Oud worden is verplicht, volwassen worden gelukkig niet",
+                    "Vandaag mag je alles! Behalve jonger worden",
+                    "Je knieën kraken nu harder dan de muziek op je feestje",
+                    "Nog een jaar wijzer? Laten we het maar hopen"
                 }),
 
                 ["newyear"] = ("GELUKKIG NIEUWJAAR!", new[]
@@ -121,7 +140,16 @@ namespace SendCATAASsurprises
                     "Is het alweer " + year + "? Ik was zo gewend aan de vorige",
                     "Een sprankelend nieuw jaar om te beginnen met oude gewoonten",
                     "Ben sinds vorig jaar niet zo enthousiast geweest over een nieuw jaar",
-                    "Zorgwekkend dat alcohol nodig is om nog een jaar het hoofd te bieden..."
+                    "Zorgwekkend dat alcohol nodig is om nog een jaar het hoofd te bieden...",
+                    "Goede voornemens: net als vorig jaar, maar met meer spijt",
+                    "Nieuw jaar, nieuwe ik! Nee hoor, gewoon dezelfde",
+                    "Mijn voornemen voor dit jaar: minder voornemens",
+                    "De sportschool is blij met je voornemen, je bank minder",
+                    "Vuurwerk: geld in brand steken, maar dan met een knal",
+                    "Het jaar is net begonnen en ik ben alweer moe",
+                    "Proost op nog 12 maanden doen alsof je weet wat je doet!",
+                    "Op 1 januari tellen calorieën niet, dat is wetenschap",
+                    "Wedden dat je tot maart het verkeerde jaartal opschrijft?"
                 })
             };
 
